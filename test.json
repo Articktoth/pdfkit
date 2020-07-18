@@ -1,0 +1,57 @@
+{
+    "Documento": {
+      "Encabezado": {
+        "IdDoc": {
+          "TipoDTE": 39,
+          "Folio": 668,
+          "FchEmis": "2020-04-02",
+          "IndServicio": 3
+        },
+        "Emisor": {
+          "RUTEmisor": "99999999-9",
+          "RznSoc": "SALCO BRAND S.A.",
+          "GiroEmis": "FARMACIA Y SUPERMERCADO",
+          "Acteco": 749990,
+          "DirOrigen": "YUNGAY 4525",
+          "CmnaOrigen": "VALPARAISO",
+          "CiudadOrigen": "VALPARAISO"
+        },
+        "Receptor": {
+          "RUTRecep": "66666666-6",
+          "RznSocRecep": "CLIENTE"
+        },
+        "Totales": {
+          "MntNeto": 100,
+          "TasaIVA": 19,
+          "IVA": 19,
+          "MntTotal": 119
+        }
+      },
+      "Detalle": [
+        {
+          "NroLinDet": 1,
+          "CdgItem": {
+            "TpoCodigo": "",
+            "VlrCodigo": "2EFCL090"
+          },
+          "NmbItem": "ASPIRINA",
+          "QtyItem": 1,
+          "UnmdItem": "UN",
+          "PrcItem": 50,
+          "MontoItem": 50
+        },
+        {
+          "NroLinDet": 2,
+          "NmbItem": "PARACETAMOL",
+          "QtyItem": 5,
+          "UnmdItem": "UN",
+          "PrcItem": 10,
+          "MontoItem": 50
+        }
+      ]
+    },
+    "Adicionales": {
+      "atendidoPor": "IRMA CARRASCO",
+      "debitoOnline": "19.199"
+    }
+  }
