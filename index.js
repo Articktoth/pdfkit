@@ -1,52 +1,18 @@
-const PDFDocument = require('pdfkit');
-const fs = require('fs');
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
-const testjson = require('./test.json');
+const app = express();
 
-const doc = new PDFDocument(
-    {
-        size: [226, 300],
-        margins: {
-            top: 20,
-            bottom: 20,
-            left: 10,
-            right: 10
-        }
-    }
-);
+const port = process.env.PORT || 5000;
 
-const datosEmisor = testjson.Documento.Encabezado.Emisor;
-const idDoc = testjson.Documento.Encabezado.IdDoc;
-const items = testjson.Documento.Detalle;
+app.use(cors());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
-doc.pipe(fs.createWriteStream('./tests/testimage5.pdf'));
+const controller = require('./controller/pdfcontroller');
+app.use('/', controller);
 
-doc
-    .fontSize(10)
-    .text(datosEmisor.RznSoc, { align: "center" })
-    .text(`${datosEmisor.DirOrigen} ${datosEmisor.CmnaOrigen} ${datosEmisor.CiudadOrigen}` , { align: "left" })
-    .text(datosEmisor.GiroEmis, { align: "left" })
-    .text(`FECHA EMISION : ${idDoc.FchEmis}`, { align: "left" })
-    .moveDown();
-
-for (item of items) {
-    doc.text(`${item.NmbItem} ${item.PrcItem}`, { align: "left" });
-}
-
-
-
-doc
-    .text(`DEBITO ONLINE:  ${testjson.Adicionales.debitoOnline}`, { align: "left" })
-    .text(`TOTAL:  ${testjson.Adicionales.debitoOnline}`, { align: "left" })
-    .moveDown()
-    .text(`ATENDIDO POR: ${testjson.Adicionales.atendidoPor}`, { align: "left" })
-    .moveDown();
-    
-doc.image('images/test2.png',{
-    fit: [200, 300],
-    align: 'center'
+app.listen(port, () => {
+    console.log(`server on port ${port}`)
 });
-
-doc.end();
-
-// console.log(table.rows)
