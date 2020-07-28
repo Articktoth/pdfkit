@@ -43,7 +43,7 @@ const downloadPdf = async () => {
     let args = document.getElementById('classSelect');
     let valueargs = args.options[args.selectedIndex].value;
 
-    console.log(valueargs)
+    // console.log(valueargs)
 
     const data = {
         razonSocial: razonSocial,

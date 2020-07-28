@@ -12,7 +12,7 @@ app.post('/create-pdf', (req, res) => {
     const giroEmisor = req.body.giroEmisor;
     const options = req.body.options;
     const details = req.body.details;
-    console.log(details)
+    // console.log(details)
 
     const doc = new PDFDocument(
         {
@@ -29,18 +29,17 @@ app.post('/create-pdf', (req, res) => {
     const idDoc = testjson.Documento.Encabezado.IdDoc;
     const items = testjson.Documento.Detalle;
 
-    doc.pipe(fs.createWriteStream(`./tests/ifdetailsfalse.pdf`));
+    doc.pipe(fs.createWriteStream(`./tests/condetalles.pdf`));
 
     doc
         .fontSize(10)
         .text(`${razonSocial}`, { align: `${options.option1}` })
         .text(`${rut}`, { align: `${options.option2}` })
         .text(`${giroEmisor}`, { align: `${options.option3}` })
-        .text(`FECHA EMISION: ${idDoc.FchEmis}`, { align: "left" })
-        .moveDown();
+        .text(`FECHA EMISION: ${idDoc.FchEmis}`, { align: "left" });
 
     //DEtalles
-        if (details == true) {
+    if (details == true) {
         for (i = 0; i < items.length; i++) {
             const item = items[i];
             const position = 100 + (i + 1) * 10;
@@ -48,6 +47,8 @@ app.post('/create-pdf', (req, res) => {
                 .text(item.NmbItem, 10, position)
                 .text(item.PrcItem, 10, position, { align: 'right' });
         }
+    } else if (details == false) {
+        doc.moveDown();
     }
 
     doc.moveDown();
