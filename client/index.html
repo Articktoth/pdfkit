@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Pdfkit</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="template">
+            <div class="divform">
+                <h3 id="title">Añadir campo Razón Social</h3>
+                <p id="rut">RUT</p>
+                <p id="ejemplo">GIRO VENTA ZAPATOS</p>
+            </div>
+        </div>
+            <form class="form">
+                <label for="rznSocial">Añadir Campo</label><br>
+                <input onkeyup="getVal()" id="inputRznSocial" name="rznSocial" type="text" maxlength="20">
+                <select onchange="addClasses()" id="classSelect"> 
+                    <option value="left">Izquierda</option>
+                    <option value="center">Centro</option>
+                    <option value="right">Derecha</option>
+                </select> <br>
+                <label for="dirOrigen">Añadir segundo campo</label><br>
+                <input onkeyup="getVal()" id="inputRut" name="dirOrigen" type="text"><br>
+                <label for="giroEmisor">Añadir tercer campo</label><br>
+                <input onkeyup="getVal()" id="giroEmisor" name="giroEmisor" type="text"><br>
+                <label for="detalles">Añadir detalles</label><br>
+                <input type="checkbox" id="myCheck" onclick="añadirDetalles()" name="detalles">
+                <button id="btn" onclick="downloadPdf()">Donwload pdf</button>
+            </form>
+    
+    </div>
+    <script src="index.js"></script>
+
+</body>
+
+</html>
