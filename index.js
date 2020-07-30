@@ -10,7 +10,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-const controller = require('./controller/pdfcontroller');
+const controller = require('./controller/index');
 app.use('/', controller);
 
 app.listen(port, () => {

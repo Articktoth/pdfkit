@@ -1,0 +1,47 @@
+{
+    "Plantilla": {
+        "Documento": {
+            "size":{
+                "width": 226,
+                "height": 450
+            },
+            "margins": {
+                "top": 20,
+                "bottom": 20,
+                "left": 20,
+                "right": 20
+            }
+        },
+        "Encabezado": {
+            "RazonSoc": {
+                "font": "Helvetica-Bold",
+                "align": "left"
+            },
+            "Rut": {
+                "align": "left"
+            },
+            "Folio": {
+                "font": "Helvetica-Bold",
+                "align": "left"
+            },
+            "Fecha": {
+                "align": "left"
+            }
+        },
+        "Details": {
+            "Items": {
+                "align": "left"
+            },
+            "Precio": {
+                "align": "right"
+            }
+        },
+        "Totales": {
+            "Total": "Helvetica-Bold",
+            "align": "center" 
+        },
+        "FooterTimbre": {
+            "align": "left"
+        }
+    }
+}
