@@ -1,11 +1,11 @@
 const PDFDocument = require('pdfkit');
-const fs = require('fs');
+const streamBuffers = require('stream-buffers');
 
-function createPdf(datajson, path, body, plantilla) {
+function createPdf(datajson, plantilla, timbrepng) {
 
     const docConfig = plantilla.Plantilla.Documento;
     const items = datajson.Documento.Detalle;
-    const height = (items.length * 10 ) + 300;
+    const height = (items.length * 15) + 300;
 
 
     const doc = new PDFDocument(
@@ -20,26 +20,44 @@ function createPdf(datajson, path, body, plantilla) {
         }
     );
 
+    const stream = doc.pipe(new streamBuffers.WritableStreamBuffer());
+    //    doc.pipe(fs.createWriteStream(path));
 
-    generateHeader(doc, datajson, body, plantilla);
+
+    generateHeader(doc, datajson, plantilla);
     generateDetails(doc, datajson, plantilla);
     generateTotales(doc, datajson, plantilla);
-    generateFooter(doc, plantilla, height);
+    generateFooter(doc, plantilla, height, timbrepng);
     doc.end();
-    doc.pipe(fs.createWriteStream(path));
+
+    return new Promise((resolve, reject) => {
+        const termino = () => {
+            resolve(stream.getContents())
+        }
+        stream.on('finish', termino)
+    })
 }
 
-function generateHeader(doc, datajson, body, plantilla) {
+function generateHeader(doc, datajson, plantilla) {
     let docHead = plantilla.Plantilla.Encabezado;
 
     doc
         .font(docHead.RazonSoc.font)
-        .text(body.razonSocial, { align: docHead.RazonSoc.align })
-        .moveDown()
+        .text(datajson.Documento.Encabezado.Emisor.RznSoc, { align: docHead.RazonSoc.align });
     doc
-        .text(body.rut, { align: docHead.Rut.align })
+        .font(docHead.Rut.font)
         .text(datajson.Documento.Encabezado.Emisor.DirOrigen, { align: docHead.DirOrigen })
-        .text(`FOLIO: ${datajson.Documento.Encabezado.IdDoc.Folio}`)
+
+    doc
+        .fontSize(10)
+        .text(datajson.Adicionales.atendidoPor);
+
+    doc 
+        .fontSize(10)
+        .font(docHead.Folio.font)
+        .text(`FOLIO: ${datajson.Documento.Encabezado.IdDoc.Folio}`);
+    
+        doc.font(docHead.Fecha.font)
         .text(datajson.Documento.Encabezado.IdDoc.FchEmis, { align: docHead.Fecha.align })
         .moveDown();
 }
@@ -50,7 +68,7 @@ function generateDetails(doc, datajson, plantilla) {
     const items = datajson.Documento.Detalle;
     for (i = 0; i < items.length; i++) {
         const item = items[i];
-        const position = 100 + (i + 1) * 10;
+        const position = 100 + (i + 1) * 15;
         doc
             .text(item.NmbItem, 10, position)
             .text(item.PrcItem, 10, position, { align: docDetails.Precio.align });
@@ -62,19 +80,19 @@ function generateTotales(doc, datajson, plantilla) {
     let docTotals = plantilla.Plantilla.Totales;
 
     doc
-        .font(docTotals.Total)
+        .font(docTotals.font)
         .text(`El IVA de esta boleta es ${datajson.Documento.Encabezado.Totales.IVA}`, { align: docTotals.align })
         .moveDown();
 }
 
 
 
-function generateFooter(doc, plantilla, height) {
+function generateFooter(doc, plantilla, height, timbrepng) {
 
     let docFooter = plantilla.Plantilla.FooterTimbre;
 
 
-    doc.image('images/test.png', 10, height - 150, {
+    doc.image(timbrepng, 10, height - 150, {
         align: docFooter.align
     })
         .text("Timbre", 10, height - 40, { align: "center" });

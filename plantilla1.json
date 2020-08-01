@@ -8,8 +8,8 @@
             "margins": {
                 "top": 20,
                 "bottom": 20,
-                "left": 20,
-                "right": 20
+                "left": 10,
+                "right": 10
             }
         },
         "Encabezado": {
@@ -17,14 +17,17 @@
                 "font": "Helvetica-Bold",
                 "align": "left"
             },
+
             "Rut": {
+                "font": "Helvetica",
                 "align": "left"
             },
             "Folio": {
-                "font": "Helvetica-Bold",
+                "font": "Helvetica",
                 "align": "left"
             },
             "Fecha": {
+                "font": "Helvetica-Bold",
                 "align": "left"
             }
         },
@@ -37,7 +40,7 @@
             }
         },
         "Totales": {
-            "Total": "Helvetica-Bold",
+            "font": "Helvetica-Bold",
             "align": "center" 
         },
         "FooterTimbre": {
