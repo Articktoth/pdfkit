@@ -5,8 +5,11 @@ const app = express();
 const plantilla1 = require('../plantilla1.json');
 const plantilla2 = require('../plantilla2.json');
 
+let nombreArchivo = `testboleta-${new Date().getMilliseconds()}`;
+
+
 app.post('/create-pdf', (req, res) => {
-    let path = './plantilla1.pdf';
+    let path = `${nombreArchivo}.pdf`;
 
     const body = {
         razonSocial: req.body.razonSocial,

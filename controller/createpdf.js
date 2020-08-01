@@ -3,12 +3,14 @@ const fs = require('fs');
 
 function createPdf(datajson, path, body, plantilla) {
 
-    let docConfig = plantilla.Plantilla.Documento;
+    const docConfig = plantilla.Plantilla.Documento;
+    const items = datajson.Documento.Detalle;
+    const height = (items.length * 10 ) + 300;
 
-    docConfig.width, docConfig.height = parseInt();
+
     const doc = new PDFDocument(
         {
-            size: [docConfig.size.width, docConfig.size.height],
+            size: [docConfig.size.width, height],
             margins: {
                 top: docConfig.margins.top,
                 bottom: docConfig.margins.bottom,
@@ -22,7 +24,7 @@ function createPdf(datajson, path, body, plantilla) {
     generateHeader(doc, datajson, body, plantilla);
     generateDetails(doc, datajson, plantilla);
     generateTotales(doc, datajson, plantilla);
-    generateFooter(doc, plantilla);
+    generateFooter(doc, plantilla, height);
     doc.end();
     doc.pipe(fs.createWriteStream(path));
 }
@@ -43,7 +45,7 @@ function generateHeader(doc, datajson, body, plantilla) {
 }
 
 function generateDetails(doc, datajson, plantilla) {
-    let docDetails = plantilla.Plantilla.Details;
+    const docDetails = plantilla.Plantilla.Details;
 
     const items = datajson.Documento.Detalle;
     for (i = 0; i < items.length; i++) {
@@ -67,17 +69,15 @@ function generateTotales(doc, datajson, plantilla) {
 
 
 
-function generateFooter(doc, plantilla) {
-    let docConfig = plantilla.Plantilla.Documento;
+function generateFooter(doc, plantilla, height) {
 
     let docFooter = plantilla.Plantilla.FooterTimbre;
 
 
-    doc.image('images/test.png', 10, docConfig.size.height - 150, {
-        fit: [200, 150],
+    doc.image('images/test.png', 10, height - 150, {
         align: docFooter.align
     })
-        .text("Timbre", 10, docConfig.size.height - 40, { align: "center" });
+        .text("Timbre", 10, height - 40, { align: "center" });
 }
 
 
