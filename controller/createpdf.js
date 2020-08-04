@@ -45,32 +45,39 @@ function generateHeader(doc, datajson, plantilla) {
         .font(docHead.RazonSoc.font)
         .text(datajson.Documento.Encabezado.Emisor.RznSoc, { align: docHead.RazonSoc.align });
     doc
+
         .font(docHead.Rut.font)
-        .text(datajson.Documento.Encabezado.Emisor.DirOrigen, { align: docHead.DirOrigen })
+        .text(datajson.Documento.Encabezado.Emisor.RUTEmisor, { align: docHead.DirOrigen })
+        .moveDown();
 
     doc
         .fontSize(10)
-        .text(datajson.Adicionales.atendidoPor);
-
-    doc 
-        .fontSize(10)
         .font(docHead.Folio.font)
         .text(`FOLIO: ${datajson.Documento.Encabezado.IdDoc.Folio}`);
-    
-        doc.font(docHead.Fecha.font)
-        .text(datajson.Documento.Encabezado.IdDoc.FchEmis, { align: docHead.Fecha.align })
+
+    doc.font(docHead.Fecha.font)
+        .text(`FECHA EMISION: ${datajson.Documento.Encabezado.IdDoc.FchEmis}`, { align: docHead.Fecha.align })
         .moveDown();
 }
 
 function generateDetails(doc, datajson, plantilla) {
     const docDetails = plantilla.Plantilla.Details;
+    const position = 100;
 
     const items = datajson.Documento.Detalle;
+
+    doc
+        .font('Helvetica')
+        .text("CANTIDAD", 10, position, { align: "left" })
+        .text("DESCRIPCION", 10, position, { align: "center" })
+        .text("VALOR", 10, position, { align: "right" })
+
     for (i = 0; i < items.length; i++) {
         const item = items[i];
         const position = 100 + (i + 1) * 15;
         doc
-            .text(item.NmbItem, 10, position)
+            .text(item.QtyItem, 20, position)
+            .text(item.NmbItem, 10, position, { align: 'center' })
             .text(item.PrcItem, 10, position, { align: docDetails.Precio.align });
     }
     doc.moveDown();

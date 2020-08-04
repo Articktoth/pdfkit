@@ -6,7 +6,7 @@ const fs = require('fs');
 
 describe('funcion que verifica pdf', () => {
     test('Deberia bajar un archivo pdf desde una url', async () => {
-        const png = fs.readFileSync('./images/test.png');
+        const png = fs.readFileSync('./images/test2.png');
         const pdf = await createPdf(testjson, plantilla1, png);
 
         let nombreArchivo = `testTimbre-${new Date().getMilliseconds()}`;

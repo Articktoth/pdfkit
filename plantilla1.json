@@ -27,8 +27,8 @@
                 "align": "left"
             },
             "Fecha": {
-                "font": "Helvetica-Bold",
-                "align": "center"
+                "font": "Helvetica",
+                "align": "left"
             }
         },
         "Details": {
