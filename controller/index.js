@@ -7,7 +7,7 @@ const plantilla2 = require('../plantilla2.json');
 const fs = require('fs');
 // let nombreArchivo = `testboleta-${new Date().getMilliseconds()}`;
 
-const timbrepng = fs.readFileSync('./controller/test.png');
+const timbrepng = fs.readFileSync('./images/test2.png');
 
 app.post('/create-pdf', (req, res) => {
     // let path = `${nombreArchivo}.pdf`;

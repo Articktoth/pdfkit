@@ -27,7 +27,7 @@ function createPdf(datajson, plantilla, timbrepng) {
     generateHeader(doc, datajson, plantilla);
     generateDetails(doc, datajson, plantilla);
     generateTotales(doc, datajson, plantilla);
-    generateFooter(doc, plantilla, height, timbrepng);
+    generateFooter(doc, plantilla, docConfig, height, timbrepng);
     doc.end();
 
     return new Promise((resolve, reject) => {
@@ -87,12 +87,15 @@ function generateTotales(doc, datajson, plantilla) {
 
 
 
-function generateFooter(doc, plantilla, height, timbrepng) {
+function generateFooter(doc, plantilla, docConfig, height, timbrepng) {
 
     let docFooter = plantilla.Plantilla.FooterTimbre;
 
 
     doc.image(timbrepng, 10, height - 150, {
+        fit: [docConfig.size.width - 10, 100],
+        // width: docConfig.size.width,
+        // height: 100,
         align: docFooter.align
     })
         .text("Timbre", 10, height - 40, { align: "center" });

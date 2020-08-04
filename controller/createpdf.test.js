@@ -6,10 +6,10 @@ const fs = require('fs');
 
 describe('funcion que verifica pdf', () => {
     test('Deberia bajar un archivo pdf desde una url', async () => {
-        const png = fs.readFileSync('./controller/test.png');
+        const png = fs.readFileSync('./images/test.png');
         const pdf = await createPdf(testjson, plantilla1, png);
 
-        let nombreArchivo = `testboleta-${new Date().getMilliseconds()}`;
+        let nombreArchivo = `testTimbre-${new Date().getMilliseconds()}`;
 
         fs.writeFileSync(`${nombreArchivo}.pdf`, pdf);
 

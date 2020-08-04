@@ -28,7 +28,7 @@
             },
             "Fecha": {
                 "font": "Helvetica-Bold",
-                "align": "left"
+                "align": "center"
             }
         },
         "Details": {
