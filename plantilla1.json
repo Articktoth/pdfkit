@@ -14,25 +14,26 @@
         },
         "Encabezado": {
             "RazonSoc": {
-                "font": "Helvetica-Bold",
+                "font": "Courier-Bold",
                 "align": "left"
             },
 
             "Rut": {
-                "font": "Helvetica",
+                "font": "Courier",
                 "align": "left"
             },
             "Folio": {
-                "font": "Helvetica",
+                "font": "Courier",
                 "align": "left"
             },
             "Fecha": {
-                "font": "Helvetica",
+                "font": "Courier",
                 "align": "left"
             }
         },
         "Details": {
             "Items": {
+                "font": "Courier",
                 "align": "left"
             },
             "Precio": {
@@ -40,8 +41,11 @@
             }
         },
         "Totales": {
-            "font": "Helvetica-Bold",
+            "font": "Courier-Bold",
             "align": "center" 
+        },
+        "Footer": {
+            "align": "left"
         },
         "FooterTimbre": {
             "align": "left"

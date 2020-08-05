@@ -1,5 +1,8 @@
 const express = require('express');
+//Data
 const testjson = require('../test.json');
+const dataBoleta = require('../dataBoleta');
+
 const { createPdf } = require('./createpdf');
 const app = express();
 const plantilla1 = require('../plantilla1.json');
@@ -11,7 +14,7 @@ const timbrepng = fs.readFileSync('./images/test2.png');
 
 app.post('/create-pdf', (req, res) => {
     // let path = `${nombreArchivo}.pdf`;
-    createPdf(testjson, plantilla1, timbrepng);
+    createPdf(dataBoleta, plantilla1, timbrepng);
 
     // res.json({
     //     ok: "ok"
