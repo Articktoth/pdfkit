@@ -22,6 +22,10 @@
                 "font": "Courier",
                 "align": "left"
             },
+            "DirOrigen": {
+                "font": "Courier",
+                "align": "left"
+            },
             "Folio": {
                 "font": "Courier",
                 "align": "left"
