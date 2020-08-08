@@ -5,7 +5,7 @@ function createPdf(datajson, plantilla, timbrepng) {
 
     const docConfig = plantilla.Plantilla.Documento;
     const items = datajson.Documento.Detalle;
-    const height = (items.length * 15) + 300;
+    const height = (items.length * 20) + 300;
 
 
     const doc = new PDFDocument(
@@ -79,15 +79,24 @@ function generateDetails(doc, datajson, plantilla) {
     doc
         .font(docDetails.Items.font)
         .text(`----------------------------------`)
-
+let base = 110;
     for (i = 0; i < items.length; i++) {
         const item = items[i];
-        const position = 100 + (i + 1) * 15;
+        let position = base + (i + 1) * 10;
+
+        if(item.NmbItem.length > 48 && item.NmbItem.length < 72){
+            position = base + (i + 1) * 25;
+        }
+        if(item.NmbItem.length > 72 ){
+            position = base + (i + 1) * 30;
+        }
+
+        console.log(position)
 
         doc
             .fontSize(8)
-            .text(item.QtyItem, 20, position, { lineBreak: false })
-            .text(item.NmbItem.slice(0, 25), 10, position, { align: 'center' })
+            .text(item.QtyItem, 20, position)
+            .text(item.NmbItem, 45, position, {width: 120})
             .text(format(item.MontoItem), 10, position, { align: docDetails.Precio.align });
     }
     doc.moveDown();
