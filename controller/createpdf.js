@@ -5,7 +5,7 @@ function createPdf(datajson, plantilla, timbrepng) {
 
     const docConfig = plantilla.Plantilla.Documento;
     const items = datajson.Documento.Detalle;
-    const height = (items.length * 20) + 300;
+    const height = (items.length * 20) + 280;
 
 
     const doc = new PDFDocument(
@@ -79,25 +79,24 @@ function generateDetails(doc, datajson, plantilla) {
     doc
         .font(docDetails.Items.font)
         .text(`----------------------------------`)
-let base = 110;
-    for (i = 0; i < items.length; i++) {
+
+    let base = 110
+    for (var i = 0; i < items.length; i++) {
         const item = items[i];
-        let position = base + (i + 1) * 10;
-
-        if(item.NmbItem.length > 48 && item.NmbItem.length < 72){
-            position = base + (i + 1) * 25;
-        }
-        if(item.NmbItem.length > 72 ){
-            position = base + (i + 1) * 30;
-        }
-
-        console.log(position)
-
+        let position = base + 10;
+        base = position
         doc
             .fontSize(8)
             .text(item.QtyItem, 20, position)
-            .text(item.NmbItem, 45, position, {width: 120})
-            .text(format(item.MontoItem), 10, position, { align: docDetails.Precio.align });
+            .text(item.NmbItem.slice(0, 48), 45, position, { width: 120 })
+            .text(format(item.MontoItem), 10, position, { align: docDetails.Precio.align })
+
+        if (item.NmbItem.length > 48) {
+            base = base + 10;
+        }
+        if (item.NmbItem.length <= 48 && item.NmbItem.length > 24) {
+            base = base + 10;
+        }
     }
     doc.moveDown();
     doc
@@ -135,14 +134,14 @@ function generateFooter(doc, plantilla, docConfig, height, timbrepng, datajson) 
     })
 }
 
-function format(monto){
+function format(monto) {
 
-    var num = monto.toString().replace(/\./g,'');
-    if(!isNaN(monto)){
-        num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g,'$1.');
-        num = num.split('').reverse().join('').replace(/^[\.]/,'');
-    }else{ 
-        num =  monto.toString().replace(/[^\d\.]*/g,'')
+    var num = monto.toString().replace(/\./g, '');
+    if (!isNaN(monto)) {
+        num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g, '$1.');
+        num = num.split('').reverse().join('').replace(/^[\.]/, '');
+    } else {
+        num = monto.toString().replace(/[^\d\.]*/g, '')
     }
 
     return num
