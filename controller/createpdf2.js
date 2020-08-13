@@ -1,7 +1,7 @@
 const PDFDocument = require('pdfkit');
 const streamBuffers = require('stream-buffers');
 
-function createPdf(datajson, plantilla, timbrepng){
+function createPdfWide(datajson, plantilla, timbrepng) {
 
     const docConfig = plantilla.Plantilla.Documento;
     const items = datajson.Documento.Detalle;
@@ -11,7 +11,10 @@ function createPdf(datajson, plantilla, timbrepng){
 
     console.log(height)
 
-    const doc = new PDFDocument (
+
+    console.log("Total items: ", items.length)
+
+    const doc = new PDFDocument(
         {
             size: [docConfig.size.width, height],
             margins: {
@@ -26,9 +29,8 @@ function createPdf(datajson, plantilla, timbrepng){
     const stream = doc.pipe(new streamBuffers.WritableStreamBuffer());
     //    doc.pipe(fs.createWriteStream(path));
 
-
     generateHeader(doc, datajson, plantilla);
-    generateDetails(doc, datajson, plantilla);
+    generateDetails(doc, datajson, plantilla, timbrepng, docConfig);
     generateTotales(doc, datajson, plantilla);
     generateFooter(doc, plantilla, docConfig, height, timbrepng, datajson);
     doc.end();
@@ -51,7 +53,7 @@ function generateHeader(doc, datajson, plantilla) {
     doc
 
         .font(docHead.Rut.font)
-        .text(datajson.Documento.Encabezado.Emisor.RUTEmisor, { align: docHead.Rut.align })
+        .text(`RUT: ${datajson.Documento.Encabezado.Emisor.RUTEmisor}`, { align: docHead.Rut.align })
         .moveDown();
 
     doc
@@ -67,57 +69,52 @@ function generateHeader(doc, datajson, plantilla) {
         .moveDown();
 }
 
-const optimizaSaltoLinea = (NmbItem, anchoMaximo) => {    
+const optimizaSaltoLinea = (NmbItem, anchoMaximo) => {
     return (
-        NmbItem.slice(anchoMaximo, anchoMaximo + 1) !==' ' ? 
-            NmbItem.slice(0, anchoMaximo) + ' ' + NmbItem.slice(anchoMaximo, anchoMaximo * 2) : 
+        NmbItem.slice(anchoMaximo, anchoMaximo + 1) !== ' ' ?
+            NmbItem.slice(0, anchoMaximo) + ' ' + NmbItem.slice(anchoMaximo, anchoMaximo * 2) :
             NmbItem.slice(0, anchoMaximo * 2)
     )
 }
 
 function generateDetails(doc, datajson, plantilla) {
     const docDetails = plantilla.Plantilla.Details;
-    const position = 90;
+    const position = 100;
 
     const items = datajson.Documento.Detalle;
 
     doc
         .font(docDetails.Items.font)
-        .text("CANTIDAD", 10, position, { align: "left" })
-        .text("DESCRIPCION", 10, position, { align: "center" })
-        .text("VALOR", 10, position, { align: "right" })
+        .text("Descripción", 10, position, { align: "left" })
+        .text("Unidad", 143, position)
+        .text("Precio", 180, position)
+        .text("Dscto", 230, position)
+        .text("Valor", 280, position)
+        .moveDown();
 
-    doc
-        .font(docDetails.Items.font)
-        .text(`----------------------------------`)
+    let base = 110;
 
-    let base = 100
     for (var i = 0; i < items.length; i++) {
         const item = items[i];
         let position = base + 10;
-        base = position
+        base = position;
 
         const nmb = optimizaSaltoLinea(item.NmbItem, 24)
 
-        // console.log("item ", nmb)
-        // console.log("base ", base)
-        // console.log("position ", position)
-
+        let discount = item.DescuentoPct == undefined ? "Sin Dscto" : item.DescuentoPct + "%";
         doc
             .fontSize(8)
-            .text(item.QtyItem, 20, position)
-            .text(nmb.slice(0, 44), 45, position, { width: 120 })
-            .text(format(item.MontoItem), 10, position, { align: docDetails.Precio.align })
+            .text(nmb.slice(0, 50), 10, position, { width: 130 })
+            .text(item.QtyItem, 145, position)
+            .text(item.PrcItem, 180, position)
+            .text(`${discount}`, 230, position)
+            .text(format(item.MontoItem), 280, position, { align: docDetails.Precio.align })
 
         if (nmb.length > 24) {
             base = base + 10;
         }
     }
     doc.moveDown();
-    doc
-        .fontSize(10)
-        .font(docDetails.Items.font)
-        .text(`----------------------------------`)
 
 }
 
@@ -125,7 +122,7 @@ function generateTotales(doc, datajson, plantilla, position) {
     let docTotals = plantilla.Plantilla.Totales;
 
     doc
-        .text("TOTAL", 10, position, { align: "left", lineBreak: false })
+        .text("TOTAL", 150, position, { lineBreak: false })
         .text(`$${format(datajson.Documento.Encabezado.Totales.MntTotal)}`, { align: "right" })
         .moveDown();
 }
@@ -140,8 +137,8 @@ function generateFooter(doc, plantilla, docConfig, height, timbrepng, datajson) 
         .text(`El IVA de esta boleta es $${format(datajson.Documento.Encabezado.Totales.IVA)}`, { align: "left", lineBreak: false })
         .moveDown();
 
-    doc.image(timbrepng, 10, doc.page.height - 110, {
-        fit: [docConfig.size.width - 10, 100],
+    doc.image(timbrepng, 10, doc.page.height - 170, {
+        fit: [docConfig.size.width, 160],
         align: docFooter.align
     })
 }
@@ -159,8 +156,6 @@ function format(monto) {
     return num
 }
 
-
-
 module.exports = {
-    createPdf
+    createPdfWide
 }

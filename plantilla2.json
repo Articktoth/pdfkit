@@ -6,33 +6,38 @@
                 "height": 450
             },
             "margins": {
-                "top": 10,
-                "bottom": 10,
+                "top": 20,
+                "bottom": 20,
                 "left": 10,
                 "right": 10
             }
         },
         "Encabezado": {
             "RazonSoc": {
-                "font": "Helvetica-Bold",
-                "align": "left"
-            },
-            "DirOrigen":{
-                "align": "left"
+                "font": "Courier-Bold",
+                "fntSize": 10,
+                "align": "center"
             },
             "Rut": {
-                "align": "right"
+                "font": "Courier",
+                "align": "left"
+            },
+            "DirOrigen": {
+                "font": "Courier-Bold",
+                "align": "left"
             },
             "Folio": {
-                "font": "Helvetica-Bold",
+                "font": "Courier",
                 "align": "left"
             },
             "Fecha": {
-                "align": "right"
+                "font": "Courier-Bold",
+                "align": "left"
             }
         },
         "Details": {
             "Items": {
+                "font": "Courier",
                 "align": "left"
             },
             "Precio": {
@@ -40,8 +45,11 @@
             }
         },
         "Totales": {
-            "Total": "Helvetica-Bold",
+            "font": "Courier-Bold",
             "align": "center" 
+        },
+        "Footer": {
+            "align": "left"
         },
         "FooterTimbre": {
             "align": "left"
