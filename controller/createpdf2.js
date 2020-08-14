@@ -31,6 +31,7 @@ function createPdfWide(datajson, plantilla, timbrepng) {
 
     generateHeader(doc, datajson, plantilla);
     generateDetails(doc, datajson, plantilla, timbrepng, docConfig);
+    doc.moveDown();
     generateTotales(doc, datajson, plantilla);
     generateFooter(doc, plantilla, docConfig, height, timbrepng, datajson);
     doc.end();
@@ -69,13 +70,13 @@ function generateHeader(doc, datajson, plantilla) {
         .moveDown();
 }
 
-const optimizaSaltoLinea = (NmbItem, anchoMaximo) => {
-    return (
-        NmbItem.slice(anchoMaximo, anchoMaximo + 1) !== ' ' ?
-            NmbItem.slice(0, anchoMaximo) + ' ' + NmbItem.slice(anchoMaximo, anchoMaximo * 2) :
-            NmbItem.slice(0, anchoMaximo * 2)
-    )
-}
+// const optimizaSaltoLinea = (NmbItem, anchoMaximo) => {
+//     return (
+//         NmbItem.slice(anchoMaximo, anchoMaximo + 1) !== ' ' ?
+//             NmbItem.slice(0, anchoMaximo) + ' ' + NmbItem.slice(anchoMaximo, anchoMaximo * 2) :
+//             NmbItem.slice(0, anchoMaximo * 2)
+//     )
+// }
 
 function generateDetails(doc, datajson, plantilla) {
     const docDetails = plantilla.Plantilla.Details;
@@ -99,20 +100,21 @@ function generateDetails(doc, datajson, plantilla) {
         let position = base + 10;
         base = position;
 
-        const nmb = optimizaSaltoLinea(item.NmbItem, 24)
+        // const nmb = optimizaSaltoLinea(item.NmbItem, 24)
 
         let discount = item.DescuentoPct == undefined ? "Sin Dscto" : item.DescuentoPct + "%";
         doc
             .fontSize(8)
-            .text(nmb.slice(0, 50), 10, position, { width: 130 })
+            .text(item.NmbItem.slice(0, 45), 10, position, { width: 130 })
             .text(item.QtyItem, 145, position)
             .text(item.PrcItem, 180, position)
             .text(`${discount}`, 230, position)
             .text(format(item.MontoItem), 280, position, { align: docDetails.Precio.align })
 
-        if (nmb.length > 24) {
+        if (item.NmbItem.length > 24) {
             base = base + 10;
         }
+        
     }
     doc.moveDown();
 
