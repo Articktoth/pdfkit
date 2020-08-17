@@ -48,6 +48,62 @@ module.exports = {
                 QtyItem: 999,
                 PrcItem: 1050,
                 MontoItem: 9999999
+            },
+            {
+                NroLinDet: 2,
+                NmbItem: 'CLÍNICO PLANOPPPPPpPP TERMÓMETRO CLÍNICO',
+                QtyItem: 999,
+                PrcItem: 1050,
+                MontoItem: 9999999
+            },
+            {
+                NroLinDet: 2,
+                NmbItem: 'TERMÓMETRO CLÍNICO PLANOPPPPPpPP TERMÓMETRO CLÍNICO PLANOPPPPPpPPTERMÓMETRO CLÍNICO PLANOPPPPPpPPTERMÓMETRO CLÍNICO PLANOPPPPPpPP TERMÓMETRO CLÍNICO PLANOPPPPPpPPTERMÓMETRO CLÍNICO PLANOPPPPPpPP TERMÓMETRO CLÍNICO PLANOPPPPPpPP TERMÓMETRO CLÍNICO PLANOPPPPPpPP TERMÓMETRO CLÍNICO PLANOPPPPPpPP',
+                QtyItem: 999,
+                PrcItem: 1050,
+                MontoItem: 9999999
+            },
+            {
+                NroLinDet: 2,
+                NmbItem: 'CLÍNICO PLANOPPPPPpPP TERMÓMETRO CLÍNICO',
+                QtyItem: 999,
+                PrcItem: 1050,
+                MontoItem: 9999999
+            },
+            {
+                NroLinDet: 2,
+                NmbItem: 'PPpPP TERMÓMETRO CLÍNICO',
+                QtyItem: 999,
+                PrcItem: 1050,
+                MontoItem: 9999999
+            },
+            {
+                NroLinDet: 2,
+                NmbItem: 'PPpPP TERMÓMETRO CLÍNICO',
+                QtyItem: 999,
+                PrcItem: 1050,
+                MontoItem: 9999999
+            },
+            {
+                NroLinDet: 2,
+                NmbItem: 'PPpPP TERMÓMETRO CLÍNICO',
+                QtyItem: 999,
+                PrcItem: 1050,
+                MontoItem: 9999999
+            },
+            {
+                NroLinDet: 2,
+                NmbItem: 'PPpPP TERMÓMETRO CLÍNICOa',
+                QtyItem: 999,
+                PrcItem: 1050,
+                MontoItem: 9999999
+            },
+            {
+                NroLinDet: 2,
+                NmbItem: 'PPpPP TERMÓMETRO CLÍNICOa',
+                QtyItem: 999,
+                PrcItem: 1050,
+                MontoItem: 9999999
             }
         ]
     },

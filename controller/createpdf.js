@@ -52,13 +52,13 @@ function generateHeader(doc, datajson, plantilla) {
     doc
 
         .font(docHead.Rut.font)
-        .text(datajson.Documento.Encabezado.Emisor.RUTEmisor, { align: docHead.Rut.align })
+        .text(`RUT: ${datajson.Documento.Encabezado.Emisor.RUTEmisor}`, { align: docHead.Rut.align })
         .moveDown();
 
     doc
         .fontSize(10)
         .font(docHead.Folio.font)
-        .text(`FOLIO: ${datajson.Documento.Encabezado.IdDoc.Folio}`);
+        .text(`BOLETA ELECTRONICA No.${datajson.Documento.Encabezado.IdDoc.Folio}`);
 
     const array = datajson.Documento.Encabezado.IdDoc.FchEmis.split('-');
     const fechaFormato = `${array[2]}/${array[1]}/${array[0]}`;

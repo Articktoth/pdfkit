@@ -1,0 +1,58 @@
+{
+    "Plantilla": {
+        "Documento": {
+            "size":{
+                "width": 619,
+                "height": 792
+            },
+            "margins": {
+                "top": 20,
+                "bottom": 20,
+                "left": 10,
+                "right": 10
+            }
+        },
+        "Encabezado": {
+            "RazonSoc": {
+                "font": "Courier-Bold",
+                "fntSize": 10,
+                "align": "center"
+            },
+            "Rut": {
+                "font": "Courier",
+                "align": "left"
+            },
+            "DirOrigen": {
+                "font": "Courier-Bold",
+                "align": "left"
+            },
+            "Folio": {
+                "font": "Courier",
+                "align": "left"
+            },
+            "Fecha": {
+                "font": "Courier-Bold",
+                "align": "left"
+            }
+        },
+        "Details": {
+            "Items": {
+                "font": "Courier",
+                "align": "left"
+            },
+            "Precio": {
+                "align": "right"
+            }
+        },
+        "Totales": {
+            "font": "Courier-Bold",
+            "align": "center" 
+        },
+        "Footer": {
+            "align": "left"
+        },
+        "FooterTimbre": {
+            "align": "left"
+        }
+    }
+}

@@ -1,0 +1,76 @@
+{
+    "Documento": {
+        "Encabezado": {
+            "IdDoc": {
+                "TipoDTE": 52,
+                "Folio": 10009,
+                "FchEmis": "2020-08-13",
+                "TipoDespacho": 2,
+                "IndTraslado": "1"
+            },
+            "Emisor": {
+                "RUTEmisor": "99999999-9",
+                "RznSoc": "PANIMEX QUIMICA LIMITADA",
+                "GiroEmis": "VENTA AL POR MAYOR DE PRODUCTOS QUIMICOS",
+                "Acteco": 466901,
+                "DirOrigen": "AV. PDTE. EDO. FREI MONTALVA 8710",
+                "CmnaOrigen": "QUILICURA",
+                "CiudadOrigen": "SANTIAGO"
+            },
+            "Receptor": {
+                "RUTRecep": "77497650-7",
+                "RznSocRecep": "Artecola Chile S.A.",
+                "GiroRecep": "Fabricación de otros productos químicos",
+                "DirRecep": "Manuel Antonio Matta 1771",
+                "CmnaRecep": "Quilicura",
+                "CiudadRecep": "Quilicura"
+            },
+            "Totales": {
+                "MntNeto": 1070132,
+                "TasaIVA": 19,
+                "IVA": 203325,
+                "MntTotal": 1273457
+            }
+        },
+        "Detalle": [
+            {
+                "NroLinDet": 1,
+                "CdgItem": {
+                    "TpoCodigo": "1",
+                    "VlrCodigo": "DIBPSTDGRA"
+                },
+                "NmbItem": "Ortoftalato de Di Iso butilo o Di Iso Butil Ftalato (DIBP)",
+                "DscItem": "\nAlmacén: TK021",
+                "QtyItem": 1000,
+                "UnmdItem": "kg",
+                "PrcItem": 1070.132,
+                "MontoItem": 1070132
+            },
+            {
+                "NroLinDet": 1,
+                "CdgItem": {
+                    "TpoCodigo": "1",
+                    "VlrCodigo": "DIBPSTDGRA"
+                },
+                "NmbItem": "Ortoftalato de Di Iso butilo o Di Iso Butil Ftalato (DIBP)",
+                "DscItem": "\nAlmacén: TK021",
+                "QtyItem": 1000,
+                "UnmdItem": "kg",
+                "PrcItem": 1070.132,
+                "MontoItem": 1070132
+            },         {
+                "NroLinDet": 1,
+                "CdgItem": {
+                    "TpoCodigo": "1",
+                    "VlrCodigo": "DIBPSTDGRA"
+                },
+                "NmbItem": "Ortoftalato de Di Iso butilo o Di Iso Butil Ftalato (DIBP)",
+                "DscItem": "\nAlmacén: TK021",
+                "QtyItem": 1000,
+                "UnmdItem": "kg",
+                "PrcItem": 1070.132,
+                "MontoItem": 1070132
+            }
+        ]
+    }
+}
